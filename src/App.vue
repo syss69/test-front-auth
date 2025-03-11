@@ -1,14 +1,14 @@
 <script setup>
-import { RouterLink, RouterView, useRouter} from 'vue-router'
-import { onMounted } from 'vue';
-import { checkAuth } from '@/utils/auth';
+import { RouterLink, RouterView, useRouter } from "vue-router";
+import { onMounted } from "vue";
+import { checkAuth } from "@/utils/auth";
 
 const router = useRouter();
 
 onMounted(async () => {
   const isAuthenticated = await checkAuth();
   if (!isAuthenticated) {
-    router.push('/connection');
+    router.push("/connection");
   }
 });
 </script>
@@ -30,6 +30,15 @@ onMounted(async () => {
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+nav a:visited,
+nav a {
+  color: greenyellow;
+}
+
+nav a:active {
+  color: greenyellow;
 }
 
 .logo {
