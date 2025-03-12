@@ -1,9 +1,13 @@
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({ user: null }),
-
   actions: {
+    async getUserFromStroage() {
+      return this.user;
+    },
+
     async login(login, password) {
       const response = await fetch("http://localhost:3000/users/login", {
         method: "POST",
@@ -11,7 +15,7 @@ export const useAuthStore = defineStore("auth", {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ login, password }),
       });
-
+      console.log(response.body);
       if (!response.ok) throw new Error("Login failed");
     },
 
@@ -30,9 +34,16 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async getUserData() {
-      const user = await fetch("http://localhost:3000/users/me");
-      this.user = user;
-      console.log(user);
+      const response = await fetch("http://localhost:3000/users/me", {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        return false;
+      }
+      const data = await response.json();
+      this.user = data;
+      return data;
     },
 
     async checkAuth() {

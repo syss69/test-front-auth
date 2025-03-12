@@ -14,7 +14,6 @@ const handleLogin = async () => {
   try {
     await authStore.login(username.value, password.value);
     router.push("/");
-    await authStore.getUserData();
   } catch (error) {
     errorMessage.value = "Échec de connexion. Vérifiez vos informations.";
   }
