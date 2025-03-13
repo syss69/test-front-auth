@@ -18,8 +18,8 @@ export const useAuthStore = defineStore("auth", {
           body: JSON.stringify({ login, password }),
         }
       );
-      await response.json();
-      console.log(response.body);
+      const res = await response.json();
+      console.log(res);
       if (!response.ok) throw new Error("Login failed");
     },
 

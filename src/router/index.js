@@ -17,7 +17,6 @@ const router = createRouter({
       path: "/connection",
       name: "connection",
       component: ConnectionView,
-      meta: { requiresAuth: false },
     },
     {
       path: "/profile",
