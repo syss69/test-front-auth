@@ -13,6 +13,7 @@ const errorMessage = ref("");
 const handleLogin = async () => {
   try {
     await authStore.login(username.value, password.value);
+    console.log("logged");
     router.push("/");
   } catch (error) {
     errorMessage.value = "Échec de connexion. Vérifiez vos informations.";
