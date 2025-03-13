@@ -1,14 +1,18 @@
 <script setup>
-import { RouterLink, RouterView, useRouter} from 'vue-router'
-import { onMounted } from 'vue';
-import { checkAuth } from '@/utils/auth';
+import { RouterLink, RouterView, useRouter } from "vue-router";
+import { onMounted } from "vue";
+import { checkAuth } from "@/utils/auth";
+import { useAuthStore } from "./stores/authStore.js";
 
 const router = useRouter();
+const authStore = useAuthStore();
 
 onMounted(async () => {
-  const isAuthenticated = await checkAuth();
+  const isAuthenticated = await authStore.checkAuth();
   if (!isAuthenticated) {
-    router.push('/connection');
+    router.push("/connection");
+  } else {
+    const user = await authStore.getUserData();
   }
 });
 </script>
@@ -30,6 +34,15 @@ onMounted(async () => {
 header {
   line-height: 1.5;
   max-height: 100vh;
+}
+
+nav a:visited,
+nav a {
+  color: greenyellow;
+}
+
+nav a:active {
+  color: greenyellow;
 }
 
 .logo {
