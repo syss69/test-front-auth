@@ -9,23 +9,29 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async login(login, password) {
-      const response = await fetch("http://localhost:3000/users/login", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ login, password }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/users/login`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ login, password }),
+        }
+      );
       console.log(response.body);
       if (!response.ok) throw new Error("Login failed");
     },
 
     async signup(name, role, login, password) {
-      const response = await fetch("http://localhost:3000/users/create", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, role, login, password }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/users/create`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, role, login, password }),
+        }
+      );
 
       if (!response.ok) {
         console.error("Signup failed", response);
@@ -34,10 +40,13 @@ export const useAuthStore = defineStore("auth", {
     },
 
     async getUserData() {
-      const response = await fetch("http://localhost:3000/users/me", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/users/me`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
       if (!response.ok) {
         return false;
       }
@@ -48,10 +57,13 @@ export const useAuthStore = defineStore("auth", {
 
     async checkAuth() {
       try {
-        const response = await fetch("http://localhost:3000/check", {
-          method: "GET",
-          credentials: "include",
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/check`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
 
         if (!response.ok) throw new Error("Not authenticated");
         return true;

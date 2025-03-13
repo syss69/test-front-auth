@@ -8,10 +8,13 @@ const user = ref(null);
 const missions = ref([]);
 
 const getMissions = async () => {
-  let response = await fetch("http://localhost:3000/mission/actual", {
-    method: "GET",
-    credentials: "include",
-  });
+  let response = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/mission/actual`,
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
   response = await response.json();
   return response.missions;
 };
