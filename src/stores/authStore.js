@@ -19,7 +19,7 @@ export const useAuthStore = defineStore("auth", {
         }
       );
       const res = await response.json();
-      console.log(res);
+      console.log(res, document.cookie);
       if (!response.ok) throw new Error("Login failed");
     },
 
